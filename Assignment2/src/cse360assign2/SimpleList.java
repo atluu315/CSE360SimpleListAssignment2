@@ -127,7 +127,7 @@ public class SimpleList
 					
 					//if size is greater than 1 and count is 75% of size,
 					//decrease size
-					if(size > 1 && count <= ((size * 3) / 4))
+					if(size > 1 && count < ((size * 3) / 4))
 					{
 						//change size to three-fourths of it's original number
 						//and create a new array with the new size
@@ -185,6 +185,88 @@ public class SimpleList
 			}
 		}
 		return searchLocation;
+	}
+	
+	/**
+	 * Adds newInt to the back of the list
+	 * @param newInt - the integer to be added to the list
+	 */
+	public void append(int newInt)
+	{
+		//increment count
+		count++;
+		
+		//declare variable for the index of newInt
+		int newIndex = count - 1;
+				
+		//if statement to make sure that count stays at ten or less
+		if(count > size)
+		{
+			//find half of the size and add it to current size
+			int halfSize = size / 2;
+			size += halfSize;
+					
+			//declare a new integer list
+			int[] newList = new int[size];
+					
+			//use for loop to add the current list's integers to newList
+			for(int arrayNum = 0; arrayNum < (count - 1); arrayNum++)
+			{
+				newList[arrayNum] = list[arrayNum];
+			}
+			
+			//add newInt to the back of the list
+			newList[newIndex] = newInt;
+			
+			//assign newList to list
+			list = newList;
+		} 
+		else
+		{
+			//add newInt to the back of the list
+			list[newIndex] = newInt;
+		}
+		
+	}
+	
+	/**
+	 * Return first value of the elements stored in the list
+	 * @return first - the first element
+	 * 				   If the list is empty, first is -1
+	 */
+	public int first()
+	{
+		//declare and initialize local variable first
+		int first = -1;
+		
+		//if statement to check if list is empty or not
+		if(count > 0)
+		{
+			//assign first element in the list to variable first
+			first = list[0];
+		}
+		
+		return first;
+	}
+	
+	/**
+	 * Returns last value of the elements stored in the list
+	 * @return last - the last element
+	 * 				   If the list is empty, last is -1
+	 */
+	public int last()
+	{
+		//declare and initialize local variable first
+		int last = -1;
+		
+		//if statement to check if list is empty or not
+		if(count > 0)
+		{
+			//assign first element in the list to variable first
+			last = list[count - 1];
+		}
+		
+		return last;
 	}
 	
 	/**

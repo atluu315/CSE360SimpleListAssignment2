@@ -137,6 +137,144 @@ public class SimpleListTest {
 	}
 	
 	@Test
+	public void testAppendSuccess() 
+	{
+		SimpleList aList = new SimpleList();
+		aList.add(2);
+		aList.add(10);
+		aList.add(9);
+		aList.add(2);
+		aList.add(10);
+		aList.append(9);
+		aList.append(2);
+		aList.append(10);
+		assertEquals("10 2 9 10 2 9 2 10", aList.toString());
+	}
+	
+	@Test
+	public void testAppendFail() 
+	{
+		SimpleList aList = new SimpleList();
+		aList.add(2);
+		aList.add(10);
+		aList.add(5);
+		aList.append(39);
+		aList.append(2);
+		aList.append(10);
+		assertNotEquals("10 2 39 5 10 2", aList.toString());
+	}
+	
+	@Test
+	public void testFirstSuccess() 
+	{
+		SimpleList aList = new SimpleList();
+		aList.add(2);
+		aList.add(10);
+		aList.add(9);
+		aList.add(2);
+		aList.add(10);
+		aList.append(9);
+		aList.append(2);
+		aList.append(10);
+		assertEquals(10, aList.first());
+	}
+	
+	@Test
+	public void testFirstFail() 
+	{
+		SimpleList aList = new SimpleList();
+		aList.add(2);
+		aList.add(10);
+		aList.add(5);
+		aList.append(39);
+		aList.append(2);
+		aList.append(10);
+		assertNotEquals(10, aList.first());
+	}
+	
+	@Test
+	public void testLastSuccess() 
+	{
+		SimpleList aList = new SimpleList();
+		aList.add(2);
+		aList.add(10);
+		aList.add(9);
+		aList.add(2);
+		aList.add(10);
+		aList.append(9);
+		aList.append(2);
+		aList.append(10);
+		aList.append(17);
+		assertEquals(17, aList.last());
+	}
+	
+	@Test
+	public void testLastFail() 
+	{
+		SimpleList aList = new SimpleList();
+		aList.add(2);
+		aList.add(10);
+		aList.add(5);
+		aList.append(39);
+		aList.append(2);
+		aList.append(10);
+		aList.append(13);
+		assertNotEquals(2, aList.last());
+	}
+	
+	@Test
+	public void testSizeSuccess() 
+	{
+		SimpleList aList = new SimpleList();
+		assertEquals("", aList.toString());
+		aList.add(2);
+		aList.add(10);
+		aList.add(9);
+		aList.add(2);
+		aList.add(10);
+		aList.append(9);
+		aList.append(2);
+		aList.append(10);
+		assertEquals(10, aList.size());
+		aList.add(2);
+		aList.add(10);
+		aList.add(9);
+		aList.add(2);
+		aList.add(10);
+		assertEquals(15, aList.size());
+		aList.remove(10);
+		aList.remove(9);
+		aList.remove(2);
+		assertEquals(11, aList.size());
+	}
+	
+	@Test
+	public void testSizeFail() 
+	{
+		SimpleList aList = new SimpleList();
+		aList.add(2);
+		aList.add(10);
+		aList.add(5);
+		aList.append(39);
+		aList.append(2);
+		aList.append(10);
+		aList.add(2);
+		aList.add(10);
+		aList.add(5);
+		aList.append(39);
+		aList.append(2);
+		aList.append(10);
+		assertNotEquals(10, aList.size());
+		aList.remove(39);
+		aList.remove(2);
+		aList.remove(5);
+		aList.remove(10);
+		aList.remove(5);
+		aList.remove(2);
+		assertNotEquals(10, aList.size());
+	}
+	
+	@Test
 	public void testToStringSuccess() 
 	{
 		SimpleList aList = new SimpleList();
