@@ -11,7 +11,7 @@ import java.util.*;
 /**
  * Allows user to create a simple integer list
  * @author amber
- * @version 1.0
+ * @version 1.1
  */
 public class SimpleList 
 {
@@ -68,29 +68,39 @@ public class SimpleList
 	 */
 	public void remove(int removeInt)
 	{
+		//local boolean variable declaration to make sure that if there are 
+		//duplicates, only the first instance of the integer is removed
+		boolean isRemoved = true;
+		
 		//for loop to search through list
 		for(int arrayNum = 0; arrayNum < count; arrayNum++)
 		{
-			//if statement to check if removeInt is in list
-			if(list[arrayNum] == removeInt)
+			if(isRemoved)
 			{
-				//variable declaration for where to start with
-				//removing elements in list
-				int startRemove = arrayNum;
-				
-				//for loop to shift all of the elements down
-				//and also replaces where removeInt was
-				for(int shift = (arrayNum + 1); shift < count; shift++)
+				//if statement to check if removeInt is in list
+				if(list[arrayNum] == removeInt)
 				{
-					list[startRemove] = list[shift];
-					startRemove++;
-				}
-				
-				//decrement count and replace last element that's shifted with 0
-				if(count > 0)
-				{
-					count--;
-					list[count] = 0;
+					//variable declaration for where to start with
+					//removing elements in list
+					int startRemove = arrayNum;
+					
+					//for loop to shift all of the elements down
+					//and also replaces where removeInt was
+					for(int shift = (arrayNum + 1); shift < count; shift++)
+					{
+						list[startRemove] = list[shift];
+						startRemove++;
+					}
+					
+					//decrement count and replace last element that's shifted with 0
+					if(count > 0)
+					{
+						count--;
+						list[count] = 0;
+					}
+					
+					//change the boolean variable to false
+					isRemoved = false;
 				}
 			}
 		}
@@ -120,7 +130,9 @@ public class SimpleList
 		for(int arrayNum = 0; arrayNum < count; arrayNum++)
 		{
 			//if statement for if searchInt is in the array
-			if(list[arrayNum] == searchInt)
+			//and searchLocation is not populated with the
+			//location of a duplicate integer
+			if((list[arrayNum] == searchInt) && (searchLocation == -1))
 			{
 				//change searchLocation to the location
 				//that searchInt is at
@@ -140,17 +152,25 @@ public class SimpleList
 		String intString = new String();
 		String intList = new String();
 		
-		//add first value of list to intList
-		intList = String.valueOf(list[0]);
-		
-		//for loop to iterate through the list
-		for(int arrayNum = 1; arrayNum < count; arrayNum++)
+		if(count > 0)
 		{
-			//convert integer to String
-			intString = String.valueOf(list[arrayNum]);
+			//add first value of list to intList
+			intList = String.valueOf(list[0]);
 			
-			//concatenate intString to intList
-			intList = intList + " " + intString;
+			//for loop to iterate through the list
+			for(int arrayNum = 1; arrayNum < count; arrayNum++)
+			{
+				//convert integer to String
+				intString = String.valueOf(list[arrayNum]);
+				
+				//concatenate intString to intList
+				intList = intList + " " + intString;
+			}
+		}
+		else if(count == 0)
+		{
+			//print out an empty string if count is equal to 0
+			intList = "";
 		}
 		
 		return intList;
