@@ -11,7 +11,7 @@ import java.util.*;
 /**
  * Allows user to create a simple integer list
  * @author amber
- * @version 1.1
+ * @version 1.2
  */
 public class SimpleList 
 {
@@ -26,12 +26,18 @@ public class SimpleList
 	private int count;
 	
 	/**
+	 * The size of the list
+	 */
+	private int size;
+	
+	/**
 	 * Class constructor. Initializes count to 0 and sets size of list to 10
 	 */
 	public SimpleList()
 	{
 		count = 0;
-		list = new int[10];
+		size = 10;
+		list = new int[size];
 	}
 	
 	/**
@@ -42,23 +48,43 @@ public class SimpleList
 	{
 		//declare third variable for swapping elements
 		int temp;
-		
+				
 		//increment count
 		count++;
-		
+				
 		//if statement to make sure that count stays at ten or less
-		if(count == 11)
+		if(count > size)
 		{
-			count = 10;
+			//find half of the size and add it to current size
+			int halfSize = size / 2;
+			size += halfSize;
+					
+			//declare a new integer list
+			int[] newList = new int[size];
+					
+			//add newInt to the beginning of newList
+			newList[0] = newInt;
+					
+			//use for loop to add the current list's integers to
+			//newList, starting from the second place of newList
+			for(int arrayNum = 0; arrayNum < (count - 1); arrayNum++)
+			{
+				newList[arrayNum + 1] = list[arrayNum];
+			}
+					
+			//assign newList to list
+			list = newList;
 		} 
-		
-		//use for loop to swap the elements while inserting
-		//newInt at the front of the array
-		for(int arrayNum = 0; arrayNum < count; arrayNum++)
+		else
 		{
-			temp = list[arrayNum];
-			list[arrayNum] = newInt;
-			newInt = temp; 
+			//use for loop to swap the elements while inserting
+			//newInt at the front of the array
+			for(int arrayNum = 0; arrayNum < count; arrayNum++)
+			{
+				temp = list[arrayNum];
+				list[arrayNum] = newInt;
+				newInt = temp; 
+			}
 		}
 	}
 	
@@ -97,6 +123,25 @@ public class SimpleList
 					{
 						count--;
 						list[count] = 0;
+					}
+					
+					//if size is greater than 1 and count is 75% of size,
+					//decrease size
+					if(size > 1 && count <= ((size * 3) / 4))
+					{
+						//change size to three-fourths of it's original number
+						//and create a new array with the new size
+						size = ((size * 3) / 4);
+						int[] newList = new int[size];
+						
+						//for loop to put the current list values into newList
+						for(int replace = 0; replace < count; replace++)
+						{
+							newList[replace] = list[replace];	
+						}
+						
+						//assign newList to list
+						list = newList;
 					}
 					
 					//change the boolean variable to false
@@ -140,6 +185,15 @@ public class SimpleList
 			}
 		}
 		return searchLocation;
+	}
+	
+	/**
+	 * Returns number of elements that could possibly be stored in the list
+	 * @return size - the size of the list
+	 */
+	public int size()
+	{
+		return size;
 	}
 	
 	/**

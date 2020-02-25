@@ -13,6 +13,18 @@ public class SimpleListTest {
 		aList.add(3);
 		aList.add(10);
 		assertEquals("10 3", aList.toString());
+		aList.add(3);
+		aList.add(10);
+		aList.add(3);
+		aList.add(10);
+		aList.add(3);
+		aList.add(10);
+		aList.add(3);
+		aList.add(10);
+		aList.add(3);
+		aList.add(10);
+		assertEquals("10 3 10 3 10 3 10 3 10 3 10 3", aList.toString());
+		assertEquals(15, aList.size());
 	}
 	
 	@Test
@@ -22,6 +34,17 @@ public class SimpleListTest {
 		aList.add(3);
 		aList.add(10);
 		assertNotEquals("3 10", aList.toString());
+		aList.add(3);
+		aList.add(10);
+		aList.add(3);
+		aList.add(10);
+		aList.add(3);
+		aList.add(10);
+		aList.add(3);
+		aList.add(10);
+		aList.add(3);
+		aList.add(10);
+		assertNotEquals("10 3 10 3 10 3 10 3 10 3", aList.toString());
 	}
 	
 	@Test
@@ -33,6 +56,7 @@ public class SimpleListTest {
 		aList.add(4);
 		aList.remove(2);
 		assertEquals("4 10", aList.toString());
+		assertEquals(7, aList.size());
 		aList.remove(4);
 		aList.remove(10);
 		aList.remove(0);
@@ -53,6 +77,7 @@ public class SimpleListTest {
 		aList.add(10);
 		aList.remove(5);
 		assertNotEquals("2", aList.toString());
+		assertNotEquals(7, aList.size());
 		aList.add(2);
 		aList.add(2);
 		aList.remove(2);
